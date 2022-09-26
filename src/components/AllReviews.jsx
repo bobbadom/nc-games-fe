@@ -11,11 +11,24 @@ useEffect(()=>{
         setAllReviews(reviews)
     })
 },[setAllReviews])
+console.log(allReviews)
 
-
+const allReviewCategories= allReviews.map((review)=>{
+    return review.category
+})
+const singleReviewCategories = [...new Set (allReviewCategories)]
 
   return (
-    <section>
+    <section> Filter reviews By category<form>
+
+        <select><option> ----</option>{
+    singleReviewCategories.map( (category,index) => 
+      <option key={index}>{category}</option> )
+  }</select>
+
+
+    </form>
+ &nbsp; <button>Filter</button>
 <ul>
 {allReviews.map((review)=> {
     return <li key ='review_id'><img src={review.review_img_url} alt={review.title}/>

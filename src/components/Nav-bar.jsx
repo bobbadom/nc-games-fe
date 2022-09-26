@@ -1,8 +1,17 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-export const NavBar = () => {
+
+
+
+const NavBar = () => {
+
+
+
   return (
-    <div>Nav-bar</div>
+    <section><h2><Link to={'/'}>Home</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Link to={'/reviews'}>Reviews</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </h2> 
+    <></></section>
   )
 }
 
