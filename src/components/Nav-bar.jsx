@@ -1,4 +1,4 @@
-import React, { useEffect, useState ,}from 'react'
+import React, { useEffect, useState}from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { getCategories} from '../utils/api'
@@ -20,7 +20,7 @@ const NavBar = () => {
     if (event.target.value === '') {
       navigate('/reviews');
     } else {
-      navigate(`/reviews/${event.target.value}`);
+      navigate(`/category/${event.target.value}`);
     }
   };
   

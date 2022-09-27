@@ -6,6 +6,7 @@ import AllReviews from './components/AllReviews';
 import Header from './components/Header';
 import { Home } from './components/Home';
 import NavBar from './components/Nav-bar';
+import SingleReview from './components/SingleReview';
 
 function App() {
   const [reviews, setReviews] = useState([])
@@ -18,7 +19,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/reviews' element={<AllReviews reviews={reviews} setReviews={setReviews} />} />
-        <Route path='/reviews/:category' element={<AllReviews setReviews={setReviews} reviews={reviews} />} />
+        <Route path='/category/:category' element={<AllReviews setReviews={setReviews} reviews={reviews} />} />
+        <Route path='/reviews/:review_id' element={<SingleReview reviews={reviews} setReviews={setReviews} />} />
       </Routes>
     </div>
   );
