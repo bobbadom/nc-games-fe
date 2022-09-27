@@ -1,43 +1,46 @@
 import React, { useEffect, useState ,}from 'react'
 import { Link } from 'react-router-dom'
-import { useNavigate , useParams } from 'react-router-dom'
-import { getReviews } from '../utils/api'
+import { useNavigate } from 'react-router-dom'
+import { getCategories} from '../utils/api'
 
 
 const NavBar = () => {
-  const [allReviews, setAllReviews] = useState([])
+  const [categories, setCategories] = useState([])
+  const [category, setCategory] = useState('all')
   const navigate = useNavigate()
-  const { slug } = useParams(); 
-  const {category} = slug || 'all'
   useEffect(()=>{
-      getReviews()
-      .then(({reviews})=>{
-          setAllReviews(reviews)
+      getCategories()
+      .then(({categories})=>{
+          setCategories(categories)
       })
-  },[setAllReviews])
+  },[])
   
   const handleReviewChange = (event) => {
-   
-    if (event.target.value === 'all') {
+ setCategory(event.target.value)
+    if (event.target.value === '') {
       navigate('/reviews');
     } else {
       navigate(`/reviews/${event.target.value}`);
     }
   };
   
-  const allReviewCategories= allReviews.map((review)=>{
-      return review.category
+  const allCategories= categories.map((category)=>{
+
+      return category.slug
   })
-  const singleReviewCategories = [...new Set (allReviewCategories)]
+
 
   return (
     <section><h2><Link to={'/'}>Home</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Link to={'/reviews'}>Reviews</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </h2> Filter reviews By category<form name='menu'>
 
 <select value={category}
-onChange={handleReviewChange} ><option value='all'> all</option>{
-singleReviewCategories.map( (category,index) => 
-<option  key={index}>{category}</option> )
+onChange={handleReviewChange} >
+  <option value=''> all</option>
+  {
+allCategories.map( (category,index) => 
+
+<option value={category} key={index}>{category}</option> )
 }</select>
 
 </form>
