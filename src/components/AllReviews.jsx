@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
+import { useParams } from 'react-router-dom'
 import { getReviews } from '../utils/api'
 
-export const AllReviews = () => {
 
-const [allReviews, setAllReviews] = useState([])
+
+export const AllReviews = ({setReviews, reviews}) => {
+
+const {category} = useParams()
 
 useEffect(()=>{
-    getReviews()
+    getReviews(category)
     .then(({reviews})=>{
-        setAllReviews(reviews)
+        setReviews(reviews)
     })
-},[setAllReviews])
-
+},[setReviews, category])
 
 
   return (
-    <section>
+    <section> 
 <ul>
-{allReviews.map((review)=> {
-    return <li key ='review_id'><img src={review.review_img_url} alt={review.title}/>
+{reviews.map((review)=> {
+    return <li key ={review.review_id}><img src={review.review_img_url} alt={review.title}/>
     <p><strong>Review title</strong>&nbsp;:&nbsp;{review.title} &nbsp;<strong> Category</strong>&nbsp;:&nbsp;{review.category}</p>
     <p><strong>Votes</strong>&nbsp;:&nbsp;{review.votes}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Comments</strong>&nbsp;:&nbsp;{review.comment_count}</p></li>
 })}
