@@ -1,19 +1,30 @@
-import React from 'react'
-import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import axios from 'axios'
+import React, {useState, useEffect}from 'react'
+import { useParams, Link } from 'react-router-dom'
+
 
 const SingleReview = () => {
-const [singleReview,setSingleReview] = useState()
+const [singleReview,setSingleReview] = useState({})
 
-const review_id = useParams()
+const {review_id}= useParams()
+
     useEffect(()=>{
-        getReviews()
-        .then(({reviews})=>{
-            setAllReviews(reviews)
+       axios.get(`https://bobs-brilliant-backend-project.herokuapp.com/api/reviews/${review_id}`)
+        .then(({data})=>{
+            setSingleReview(data)
         })
-    },[setAllReviews])
+    },[review_id])
+
   return (
-    <div>SingleReview</div>
+    <section>
+<h2>  {singleReview.title} </h2>
+<img src={singleReview.review_img_url}/>
+<h3>{singleReview.owner}</h3>
+<p><Link to ={`/category/${singleReview.category}`}><strong> Category</strong>
+    &nbsp;:&nbsp;{singleReview.category}</Link></p>
+<p>{singleReview.review_body}</p>
+<p>{singleReview.votes}</p>
+    </section>
   )
 }
 

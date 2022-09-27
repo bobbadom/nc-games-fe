@@ -1,5 +1,5 @@
 import React, { useEffect} from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams , Link} from 'react-router-dom'
 import { getReviews } from '../utils/api'
 
 
@@ -21,7 +21,8 @@ useEffect(()=>{
 <ul>
 {reviews.map((review)=> {
     return <li key ={review.review_id}><img src={review.review_img_url} alt={review.title}/>
-    <p><strong>Review title</strong>&nbsp;:&nbsp;{review.title} &nbsp;<strong> Category</strong>&nbsp;:&nbsp;{review.category}</p>
+    <p> <Link to ={`/reviews/${review.review_id}`}><strong>Review title</strong>&nbsp;:&nbsp;{review.title} &nbsp;</Link>&nbsp;&nbsp;&nbsp;<Link to ={`/category/${review.category}`}><strong> Category</strong>
+    &nbsp;:&nbsp;{review.category}</Link></p>
     <p><strong>Votes</strong>&nbsp;:&nbsp;{review.votes}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Comments</strong>&nbsp;:&nbsp;{review.comment_count}</p></li>
 })}
 
