@@ -25,3 +25,11 @@ img {
   color: white;
 }
 
+.comments{
+  box-sizing: content-box;
+width:fit-content;
+border: solid #5B6DCD 5px;
+padding: 5px;
+text-align: center;
+margin: 0 auto;
+}

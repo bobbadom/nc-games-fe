@@ -17,24 +17,31 @@ import { useParams } from 'react-router-dom'
             setComments(data.comments)
         })
     },[review_id])
-    
-  return (
-    <section>
-        <ul>
-{comments.map((comment)=>{
-    const convertedDate = comment.created_at
-    const dateString = `${convertedDate.split('T')[1].split('.')[0].split(':')[0]}:${convertedDate.split('T')[1].split('.')[0].split(':')[1]}, ${convertedDate.split('T')[0]}`
-    return <li className='comments' key={comment.comment_id}>
-        <p>Created by:<strong> {comment.author}</strong> </p>
-        <p>{comment.body} </p>
-        <p>Date posted : {dateString}</p>
-    </li>
-})}
+    if (comments.length === 0){
+        return(
+            <h3> No comments gave been posted yet. you'd be really coool if you posted the first one</h3>
+        )
+    }else {
 
-        </ul>
+        return (
+          <section>
+              <ul>
+      {comments.map((comment)=>{
+          const convertedDate = comment.created_at
+          const dateString = `${convertedDate.split('T')[1].split('.')[0].split(':')[0]}:${convertedDate.split('T')[1].split('.')[0].split(':')[1]}, ${convertedDate.split('T')[0]}`
+          return <li className='comments' key={comment.comment_id}>
+              <p>Created by:<strong> {comment.author}</strong> </p>
+              <p>{comment.body} </p>
+              <p>Date posted : {dateString}</p>
+          </li>
+      })}
+      
+              </ul>
+      
+          </section>
+        )
 
-    </section>
-  )
+    }
 }
 
 export default CommentCard
