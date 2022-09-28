@@ -15,7 +15,6 @@ useEffect(()=>{
     })
 },[setReviews, category])
 
-
   return (
     <section> 
 <ul>
