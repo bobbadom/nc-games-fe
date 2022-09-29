@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import CommentAdder from './CommentAdder'
 
 
 
@@ -37,7 +38,7 @@ import { useParams } from 'react-router-dom'
       })}
       
               </ul>
-      
+      <CommentAdder setComments={setComments} comments={comments} review_id={review_id}/>
           </section>
         )
 
