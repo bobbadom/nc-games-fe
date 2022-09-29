@@ -53,7 +53,6 @@ useEffect(()=>{
       setReviews(reviews)
   })
 },[setReviews, category,sortBy, orderBy])
-console.log(sortBy)
 return (
   <section> 
        Filter reviews By category
