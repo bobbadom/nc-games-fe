@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import CommentAdder from './CommentAdder'
 
 
 
@@ -18,8 +19,10 @@ import { useParams } from 'react-router-dom'
         })
     },[review_id])
     if (comments.length === 0){
-        return(
+        return(<section>
             <h3> No comments gave been posted yet. you'd be really coool if you posted the first one</h3>
+            <CommentAdder setComments={setComments} comments={comments} review_id={review_id}/>
+        </section>
         )
     }else {
 
@@ -37,7 +40,7 @@ import { useParams } from 'react-router-dom'
       })}
       
               </ul>
-      
+      <CommentAdder setComments={setComments} comments={comments} review_id={review_id}/>
           </section>
         )
 
