@@ -19,8 +19,10 @@ import CommentAdder from './CommentAdder'
         })
     },[review_id])
     if (comments.length === 0){
-        return(
+        return(<section>
             <h3> No comments gave been posted yet. you'd be really coool if you posted the first one</h3>
+            <CommentAdder setComments={setComments} comments={comments} review_id={review_id}/>
+        </section>
         )
     }else {
 
