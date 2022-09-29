@@ -4,19 +4,16 @@ const gamesApi = axios.create({
     baseURL: "https://bobs-brilliant-backend-project.herokuapp.com/api"
 })
 
-export const getReviews = (category) => {
-    if (category) {
-        return gamesApi.get(`/reviews?category=${category}`)
-            .then((res) => {
-                return res.data
-            })
-    } else {
+export const getReviews = (category, sortBy, orderBy) => {
 
-        return gamesApi.get('/reviews')
-            .then((res) => {
-                return res.data
-            })
-    }
+    return gamesApi.get(`/reviews`, { params: { category: category, sort_by: sortBy, order: orderBy } })
+        .then((res) => {
+            return res.data
+        })
+
+
+
+
 }
 
 export const getCategories = () => {
