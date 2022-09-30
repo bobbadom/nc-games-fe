@@ -1,12 +1,12 @@
 import axios from 'axios'
 import React, {useState, useEffect}from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import CommentCard from './CommentCard'
 
 
 const SingleReview = () => {
 const [singleReview,setSingleReview] = useState({})
-
+const navigate = useNavigate()
 const {review_id}= useParams()
 
     useEffect(()=>{
@@ -14,7 +14,10 @@ const {review_id}= useParams()
         .then(({data})=>{
             setSingleReview(data)
         })
-    },[review_id])
+        .catch((err)=>{
+          navigate(`${err.response.data.msg}`)
+        })
+    },[review_id,navigate])
 
     const voteOnReview = (() =>{
 

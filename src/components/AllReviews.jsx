@@ -12,15 +12,15 @@ const [newCategory, setNewCategory] = useState('all')
 const [sortBy, setSortBy]= useState('created_at')
 const [orderBy, setOrderBy] = useState('DESC')
 
-
-
-
 const navigate = useNavigate()
+
+
 useEffect(()=>{
   getCategories()
   .then(({categories})=>{
     setCategories(categories)
   })
+ 
 },[])
 
 const handleReviewChange = (e) => {
@@ -52,7 +52,12 @@ useEffect(()=>{
   .then(({reviews})=>{
       setReviews(reviews)
   })
-},[setReviews, category,sortBy, orderBy])
+  .catch((err)=>{
+    console.log(err)
+    navigate('*')
+  })
+},[setReviews, category,sortBy, orderBy,navigate])
+
 return (
   <section> 
        Filter reviews By category

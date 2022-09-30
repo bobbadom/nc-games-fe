@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import AllReviews from './components/AllReviews';
+import ErrorPage from './components/ErrorPage';
 import Header from './components/Header';
 import { Home } from './components/Home';
 import NavBar from './components/Nav-bar';
@@ -17,6 +18,7 @@ function App() {
       <NavBar />
 
       <Routes>
+        <Route path='*' element={<ErrorPage />} />
         <Route path='/' element={<Home />} />
         <Route path='/reviews' element={<AllReviews reviews={reviews} setReviews={setReviews} />} />
         <Route path='/category/:category' element={<AllReviews setReviews={setReviews} reviews={reviews} />} />
