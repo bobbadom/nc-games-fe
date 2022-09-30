@@ -11,15 +11,21 @@ const [posted, setPosted] = useState(false)
 
 const handleSubmit = (e) =>{
 e.preventDefault()
-axios.post(`https://bobs-brilliant-backend-project.herokuapp.com/api/reviews/${review_id}/comments`,{votes : 0, review_id: review_id, created_at:new Date(), username: username, body : textBody, comment_id : comments.length + 1})
+axios.post(`https://bobs-brilliant-backend-project.herokuapp.com/api/reviews/${review_id}/comments`,{votes : 0, 
+review_id: review_id,
+ created_at:new Date(),
+  username: username, 
+  body : textBody, 
+  comment_id : ((comments.length !== 0) ? ((comments[comments.length-1].comment_id)+1) : 1)})
 .then(({data})=>{
-    setComments((currItems) => {
+  setComments((currComments) => {
+      console.log(currComments, 'comments')
       setPosted(true)
-      return [ ...currItems, data.comment]
+      return [ ...currComments, data.comment]
     })
     setUsername('')
     setTextBody('')
-})
+  })
 }
 
 if(posted){
