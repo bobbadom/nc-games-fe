@@ -1,12 +1,13 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import CommentAdder from './CommentAdder'
-
+import { UserContext } from '../context/User'
 
 
 
  const CommentCard = () => {
+    const {loggedInUser} =useContext(UserContext)
 
     const [comments, setComments] = useState([])
     const {review_id}= useParams()
@@ -89,7 +90,7 @@ import CommentAdder from './CommentAdder'
                 <p>Created by:<strong> {comment.author}</strong> </p>
                 <p>{comment.body} </p>
                 <p>Date posted : {dateString}</p>
-                <button value={comment.comment_id} onClick={(()=>{deleteComment(comment.comment_id)})}>Delete</button>
+               {} <button value={comment.comment_id} onClick={(()=>{deleteComment(comment.comment_id)})}>Delete</button>
             </li>
            
         })}
@@ -112,7 +113,7 @@ import CommentAdder from './CommentAdder'
               <p>Created by:<strong> {comment.author}</strong> </p>
               <p>{comment.body} </p>
               <p>Date posted : {dateString}</p>
-              <button value={comment.comment_id} onClick={(()=>{deleteComment(comment.comment_id)})}>Delete</button>
+              {comment.author === loggedInUser.username ?<button value={comment.comment_id} onClick={(()=>{deleteComment(comment.comment_id)})}>Delete</button>: <p> </p>}
           </li>
       })}
       

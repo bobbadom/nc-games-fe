@@ -22,3 +22,10 @@ export const getCategories = () => {
             return res.data
         })
 }
+
+export const getUsers = () => {
+    return gamesApi.get('/users')
+        .then((res) => {
+            return res.data
+        })
+}
